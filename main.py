@@ -11,15 +11,8 @@ from controllers.student_to_projects_controller import match_student_to_projects
 
 app = Flask(__name__)
 
-# Restrict CORS to specific domains
-CORS(app, resources={
-    r"/v1/*": {
-        "origins": [
-            "http://frontend.example.com",
-            "http://localhost:3000"
-        ]
-    }
-})
+# Allow CORS for all origins and methods
+CORS(app, resources={r"/*": {"origins": "*", "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"], "allow_headers": "*"}})
 
 # Rest of your main.py code remains unchanged
 app.route("/v1/match/projects-to-students", methods=["POST"])(project_to_students_app.view_functions['match_project_to_students'])
